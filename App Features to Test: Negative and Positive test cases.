@@ -1,0 +1,59 @@
+1. Login and Registration
+Positive Test Cases:
+Validate user registration with valid data.
+Test login functionality with correct credentials.
+Check password reset with valid email.
+
+Negative Test Cases:
+Validate user registration with invalid data (e.g., missing fields, invalid email format).
+Test login functionality with incorrect credentials.
+Check password reset with invalid email.
+
+2. Adding GPS Devices and Mobile Devices
+Positive Test Cases:
+Verify the ability to add devices with valid details.
+Test input validation for valid device details.
+
+Negative Test Cases:
+Validate error handling for duplicate device entries.
+Test input validation with invalid device details (e.g., incorrect format).
+
+3. Creating Groups
+Positive Test Cases:
+Create a group with valid details and add devices.
+Ensure group names meet the required naming conventions.
+
+Negative Test Cases:
+Attempt to create a group without providing required details.
+Attempt to create a group with a name that already exists.
+
+4. Adding Geofences for Devices
+Positive Test Cases:
+Validate geofence creation for individual devices with valid data.
+Test geofence alerts when a device exits or enters a specified boundary.
+
+Negative Test Cases:
+Validate geofence creation with invalid data.
+Test geofence alerts with incorrect boundary conditions.
+Check for issues in the UI display of active geofences.
+
+5. Viewing Reports
+Positive Test Cases:
+Validate the generation of reports on device status, location, or performance with valid data.
+Test filtering options for reports (e.g., date range, device type).
+Ensure accurate data is displayed in reports.
+
+Negative Test Cases:
+Validate report generation with invalid filters (e.g., incorrect date formats).
+Check for errors or inconsistencies in report data.
+
+6. Live Tracking
+Positive Test Cases:
+Test real-time tracking updates for vehicles and mobile devices.
+Validate UI responsiveness to changes in device location.
+Verify integration with map services for location tracking.
+
+Negative Test Cases:
+Simulate network latency and observe UI responsiveness.
+Introduce invalid location data and verify UI response.
+Simulate map service failures and check the application's error handling.
