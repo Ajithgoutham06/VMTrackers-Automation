@@ -25,8 +25,6 @@ public class AdvancedTest {
     @AfterTest
     public void tearDown() {
         driver.quit();
-    
-    
     }
 }
 class LoginPage {
@@ -52,3 +50,6 @@ class LoginPage {
         loginButton.click();
     }
 }
+  
+    
+  
