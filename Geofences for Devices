@@ -1,0 +1,28 @@
+Feature: Geofence Management
+
+  Scenario: Successfully create a geofence with valid data
+    Given User is on Geofence Creation Page
+    When User enters valid geofence details
+    And User clicks on Create Geofence button
+    Then Geofence should be created successfully
+
+  Scenario: Attempt to create a geofence with invalid data
+    Given User is on Geofence Creation Page
+    When User enters invalid geofence details
+    And User clicks on Create Geofence button
+    Then User should see an error message
+
+  Scenario: Verify geofence alerts for exiting boundary
+    Given Geofence is active
+    When Device exits the geofence boundary
+    Then User should receive an exit alert
+
+  Scenario: Verify geofence alerts for entering boundary
+    Given Geofence is active
+    When Device enters the geofence boundary
+    Then User should receive an entry alert
+
+  Scenario: Ensure UI displays active geofences correctly
+    Given Geofences are active
+    When User views the geofences on the UI
+    Then Active geofences should be displayed correctly
