@@ -1,0 +1,25 @@
+Feature: Group Groups
+
+  Scenario: Successfully create a group with valid details and add devices
+    Given User is on Group Creation Page
+    When User enters valid group details and adds devices
+    And User clicks on Create Group button
+    Then Group should be created successfully
+
+  Scenario: Attempt to create a group with invalid details
+    Given User is on Group Creation Page
+    When User enters invalid group details
+    And User clicks on Create Group button
+    Then User should see an error message
+
+  Scenario: Successfully delete an existing group
+    Given User is on Group Management Page
+    When User selects an existing group
+    And User clicks on Delete Group button
+    Then Group should be deleted successfully
+
+  Scenario: Successfully modify an existing group's details
+    Given User is on Group Management Page
+    When User selects an existing group and enters new details
+    And User clicks on Save Changes button
+    Then Group details should be updated successfully
