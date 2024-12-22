@@ -1,0 +1,123 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.cucumber.java.en.*;
+
+public class LoginAndRegistrationSteps {
+    WebDriver driver;
+    @Given("User is on Registration Page")
+    public void user_is_on_registration_page() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("https://vmtrackers.app/register");    
+    }
+
+    @When("User enters valid registration details")
+    public void user_enters_valid_registration_details() {
+        WebElement username = driver.findElement(By.id("username"));
+        WebElement email = driver.findElement(By.id("email"));
+        WebElement password = driver.findElement(By.id("password"));
+        username.sendKeys("validUser");
+        email.sendKeys("validUser@example.com");
+        password.sendKeys("validPassword");
+    }
+
+    @When("User enters invalid registration details")
+    public void user_enters_invalid_registration_details() {
+        WebElement username = driver.findElement(By.id("username"));
+        WebElement email = driver.findElement(By.id("email"));
+        WebElement password = driver.findElement(By.id("password"));
+        username.sendKeys("");
+        email.sendKeys("invalidEmail");
+        password.sendKeys("short");
+    }
+
+    @And("User clicks on Register button")
+    public void user_clicks_on_register_button() {
+        WebElement registerButton = driver.findElement(By.id("registerButton"));
+        registerButton.click();
+    }
+
+    @Then("User should see a registration success message")
+    public void user_should_see_a_registration_success_message() {
+        WebElement successMessage = driver.findElement(By.id("successMessage"));
+        Assert.assertTrue(successMessage.isDisplayed(), "Registration failed!");
+        driver.quit();
+    }
+
+    @Then("User should see an error message")
+    public void user_should_see_an_error_message() {
+        WebElement errorMessage = driver.findElement(By.id("errorMessage"));
+        Assert.assertTrue(errorMessage.isDisplayed(), "Error message not displayed!");
+        driver.quit();
+    }
+
+    @Given("User is on Login Page")
+    public void user_is_on_login_page() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("https://vmtrackers.app/login");
+    }
+
+    @When("User enters valid username and password")
+    public void user_enters_valid_username_and_password() {
+        WebElement username = driver.findElement(By.id("username"));
+        WebElement password = driver.findElement(By.id("password"));
+        username.sendKeys("validUser");
+        password.sendKeys("validPassword");
+    }
+
+    @When("User enters invalid username and password")
+    public void user_enters_invalid_username_and_password() {
+        WebElement username = driver.findElement(By.id("username"));
+        WebElement password = driver.findElement(By.id("password"));
+        username.sendKeys("invalidUser");
+        password.sendKeys("invalidPassword");
+    }
+
+    @And("User clicks on Login button")
+    public void user_clicks_on_login_button() {
+        WebElement loginButton = driver.findElement(By.id("loginButton"));
+        loginButton.click();
+    }
+
+    @Then("User should be redirected to the Dashboard")
+    public void user_should_be_redirected_to_the_dashboard() {
+        WebElement dashboard = driver.findElement(By.id("dashboard"));
+        Assert.assertTrue(dashboard.isDisplayed(), "Login failed!");
+        driver.quit();
+    }
+
+    @Given("User is on Password Reset Page")
+    public void user_is_on_password_reset_page() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("https://vmtrackers.app/password-reset");
+    }
+
+    @When("User enters valid email")
+    public void user_enters_valid_email() {
+        WebElement email = driver.findElement(By.id("email"));
+        email.sendKeys("validUser@example.com");
+    }
+
+    @When("User enters invalid email")
+    public void user_enters_invalid_email() {
+        WebElement email = driver.findElement(By.id("email"));
+        email.sendKeys("invalidEmail");
+    }
+
+    @And("User clicks on Reset Password button")
+    public void user_clicks_on_reset_password_button() {
+        WebElement resetButton = driver.findElement(By.id("resetButton"));
+        resetButton.click();
+    }
+
+    @Then("User should see a password reset confirmation message")
+    public void user_should_see_a_password_reset_confirmation_message() {
+        WebElement confirmationMessage = driver.findElement(By.id("confirmationMessage"));
+        Assert.assertTrue(confirmationMessage.isDisplayed(), "Password reset failed!");
+        driver.quit();
+    }
+}
