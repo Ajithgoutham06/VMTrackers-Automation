@@ -1,0 +1,76 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.cucumber.java.en.*;
+
+public class AddDevicesSteps {
+    WebDriver driver;
+
+    @Given("User is on Add Device Page")
+    public void user_is_on_add_device_page() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("https://vmtrackers.app/add-device");
+    }
+
+    @When("User enters valid GPS device details")
+    public void user_enters_valid_gps_device_details() {
+        WebElement deviceName = driver.findElement(By.id("deviceName"));
+        WebElement deviceType = driver.findElement(By.id("deviceType"));
+        WebElement deviceId = driver.findElement(By.id("deviceId"));
+        deviceName.sendKeys("GPS Tracker 1");
+        deviceType.sendKeys("GPS");
+        deviceId.sendKeys("12345");
+    }
+
+    @When("User enters valid mobile device details")
+    public void user_enters_valid_mobile_device_details() {
+        WebElement deviceName = driver.findElement(By.id("deviceName"));
+        WebElement deviceType = driver.findElement(By.id("deviceType"));
+        WebElement deviceId = driver.findElement(By.id("deviceId"));
+        deviceName.sendKeys("Mobile Tracker 1");
+        deviceType.sendKeys("Mobile");
+        deviceId.sendKeys("67890");
+    }
+
+    @When("User enters invalid device details")
+    public void user_enters_invalid_device_details() {
+        WebElement deviceName = driver.findElement(By.id("deviceName"));
+        WebElement deviceType = driver.findElement(By.id("deviceType"));
+        WebElement deviceId = driver.findElement(By.id("deviceId"));
+        deviceName.sendKeys("");
+        deviceType.sendKeys("GPS");
+        deviceId.sendKeys("abcde");
+    }
+
+    @When("User enters details for an existing device")
+    public void user_enters_details_for_an_existing_device() {
+        WebElement deviceName = driver.findElement(By.id("deviceName"));
+        WebElement deviceType = driver.findElement(By.id("deviceType"));
+        WebElement deviceId = driver.findElement(By.id("deviceId"));
+        deviceName.sendKeys("GPS Tracker 1");
+        deviceType.sendKeys("GPS");
+        deviceId.sendKeys("12345");
+    }
+
+    @And("User clicks on Add Device button")
+    public void user_clicks_on_add_device_button() {
+        WebElement addButton = driver.findElement(By.id("addButton"));
+        addButton.click();
+    }
+
+    @Then("Device should be added successfully")
+    public void device_should_be_added_successfully() {
+        WebElement successMessage = driver.findElement(By.id("successMessage"));
+        Assert.assertTrue(successMessage.isDisplayed(), "Device addition failed!");
+        driver.quit();
+    }
+
+    @Then("User should see an error message")
+    public void user_should_see_an_error_message() {
+        WebElement errorMessage = driver.findElement(By.id("errorMessage"));
+        Assert.assertTrue(errorMessage.isDisplayed(), "Error message not displayed!");
+        driver.quit();
+    }
+}
