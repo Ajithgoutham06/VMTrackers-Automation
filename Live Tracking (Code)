@@ -1,0 +1,76 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.cucumber.java.en.*;
+
+public class LiveTrackingSteps {
+    WebDriver driver;
+
+    @Given("User is on Live Tracking Page")
+    public void user_is_on_live_tracking_page() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("https://vmtrackers.app/live-tracking");
+    }
+
+    @When("Vehicle location updates in real-time")
+    public void vehicle_location_updates_in_real_time() {
+        // Simulate real-time location update for the vehicle
+        WebElement vehicleLocation = driver.findElement(By.id("vehicleLocation"));
+        vehicleLocation.sendKeys("Updated Location");
+    }
+
+    @Then("The UI should update to show the new location of the vehicle")
+    public void the_ui_should_update_to_show_the_new_location_of_the_vehicle() {
+        WebElement updatedVehicleLocation = driver.findElement(By.id("updatedVehicleLocation"));
+        Assert.assertTrue(updatedVehicleLocation.isDisplayed(), "UI did not update with new vehicle location!");
+        driver.quit();
+    }
+
+    @When("Mobile device location updates in real-time")
+    public void mobile_device_location_updates_in_real_time() {
+        // Simulate real-time location update for the mobile device
+        WebElement mobileDeviceLocation = driver.findElement(By.id("mobileDeviceLocation"));
+        mobileDeviceLocation.sendKeys("Updated Location");
+    }
+
+    @Then("The UI should update to show the new location of the mobile device")
+    public void the_ui_should_update_to_show_the_new_location_of_the_mobile_device() {
+        WebElement updatedMobileDeviceLocation = driver.findElement(By.id("updatedMobileDeviceLocation"));
+        Assert.assertTrue(updatedMobileDeviceLocation.isDisplayed(), "UI did not update with new mobile device location!");
+        driver.quit();
+    }
+
+    @Given("Device is being tracked in real-time")
+    public void device_is_being_tracked_in_real_time() {
+        // Ensure device tracking is active
+    }
+
+    @When("Device location changes")
+    public void device_location_changes() {
+        // Simulate device location change
+        WebElement deviceLocation = driver.findElement(By.id("deviceLocation"));
+        deviceLocation.sendKeys("New Location");
+    }
+
+    @Then("The UI should remain responsive and update correctly")
+    public void the_ui_should_remain_responsive_and_update_correctly() {
+        WebElement updatedLocation = driver.findElement(By.id("updatedLocation"));
+        Assert.assertTrue(updatedLocation.isDisplayed(), "UI did not update correctly with new device location!");
+    }
+
+    @When("Device moves")
+    public void device_moves() {
+        // Simulate device movement
+        WebElement deviceMovement = driver.findElement(By.id("deviceMovement"));
+        deviceMovement.sendKeys("Moving");
+    }
+
+    @Then("The map service should update to show the new location")
+    public void the_map_service_should_update_to_show_the_new_location() {
+        WebElement mapLocation = driver.findElement(By.id("mapLocation"));
+        Assert.assertTrue(mapLocation.isDisplayed(), "Map service did not update with new location!");
+        driver.quit();
+    }
+}
