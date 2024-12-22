@@ -1,0 +1,97 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.cucumber.java.en.*;
+
+public class GroupManagementSteps {
+    WebDriver driver;
+
+    @Given("User is on Group Creation Page")
+    public void user_is_on_group_creation_page() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("https://vmtrackers.app/create-group");
+    }
+
+    @When("User enters valid group details and adds devices")
+    public void user_enters_valid_group_details_and_adds_devices() {
+        WebElement groupName = driver.findElement(By.id("groupName"));
+        WebElement addDeviceButton = driver.findElement(By.id("addDeviceButton"));
+        groupName.sendKeys("New Group");
+        addDeviceButton.click();
+        // Add devices logic here
+    }
+
+    @When("User enters invalid group details")
+    public void user_enters_invalid_group_details() {
+        WebElement groupName = driver.findElement(By.id("groupName"));
+        groupName.sendKeys("!@#$%");
+    }
+
+    @And("User clicks on Create Group button")
+    public void user_clicks_on_create_group_button() {
+        WebElement createGroupButton = driver.findElement(By.id("createGroupButton"));
+        createGroupButton.click();
+    }
+
+    @Then("Group should be created successfully")
+    public void group_should_be_created_successfully() {
+        WebElement successMessage = driver.findElement(By.id("successMessage"));
+        Assert.assertTrue(successMessage.isDisplayed(), "Group creation failed!");
+        driver.quit();
+    }
+
+    @Then("User should see an error message")
+    public void user_should_see_an_error_message() {
+        WebElement errorMessage = driver.findElement(By.id("errorMessage"));
+        Assert.assertTrue(errorMessage.isDisplayed(), "Error message not displayed!");
+        driver.quit();
+    }
+
+    @Given("User is on Group Management Page")
+    public void user_is_on_group_management_page() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("https://vmtrackers.app/manage-groups");
+    }
+
+    @When("User selects an existing group")
+    public void user_selects_an_existing_group() {
+        WebElement group = driver.findElement(By.id("existingGroup"));
+        group.click();
+    }
+
+    @And("User clicks on Delete Group button")
+    public void user_clicks_on_delete_group_button() {
+        WebElement deleteGroupButton = driver.findElement(By.id("deleteGroupButton"));
+        deleteGroupButton.click();
+    }
+
+    @Then("Group should be deleted successfully")
+    public void group_should_be_deleted_successfully() {
+        WebElement successMessage = driver.findElement(By.id("successMessage"));
+        Assert.assertTrue(successMessage.isDisplayed(), "Group deletion failed!");
+        driver.quit();
+    }
+
+    @When("User selects an existing group and enters new details")
+    public void user_selects_an_existing_group_and_enters_new_details() {
+        WebElement groupName = driver.findElement(By.id("groupName"));
+        groupName.clear();
+        groupName.sendKeys("Updated Group Name");
+    }
+
+    @And("User clicks on Save Changes button")
+    public void user_clicks_on_save_changes_button() {
+        WebElement saveChangesButton = driver.findElement(By.id("saveChangesButton"));
+        saveChangesButton.click();
+    }
+
+    @Then("Group details should be updated successfully")
+    public void group_details_should_be_updated_successfully() {
+        WebElement successMessage = driver.findElement(By.id("successMessage"));
+        Assert.assertTrue(successMessage.isDisplayed(), "Group update failed!");
+        driver.quit();
+    }
+}
