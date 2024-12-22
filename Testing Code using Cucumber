@@ -1,0 +1,54 @@
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+public class AdvancedTest {
+    WebDriver driver;
+
+    @BeforeTest
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("https://example.com");
+    }
+    @Test
+    public void testLogin() {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login("user", "password");
+        // Additional assertions to validate outcomes
+    }
+    @AfterTest
+    public void tearDown() {
+        driver.quit();
+    
+    
+    }
+}
+class LoginPage {
+    WebDriver driver;
+
+    @FindBy(id = "username")
+    WebElement usernameField;
+
+    @FindBy(id = "password")
+    WebElement passwordField;
+
+    @FindBy(id = "loginButton")
+    WebElement loginButton;
+
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
+    }
+
+    public void login(String username, String password) {
+        usernameField.sendKeys(username);
+        passwordField.sendKeys(password);
+        loginButton.click();
+    }
+}
