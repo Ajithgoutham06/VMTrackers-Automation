@@ -1,0 +1,96 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.cucumber.java.en.*;
+
+public class GeofenceManagementSteps {
+    WebDriver driver;
+
+    @Given("User is on Geofence Creation Page")
+    public void user_is_on_geofence_creation_page() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("https://vmtrackers.app/create-geofence");
+    }
+
+    @When("User enters valid geofence details")
+    public void user_enters_valid_geofence_details() {
+        WebElement geofenceName = driver.findElement(By.id("geofenceName"));
+        WebElement geofenceBoundary = driver.findElement(By.id("geofenceBoundary"));
+        geofenceName.sendKeys("Geofence 1");
+        geofenceBoundary.sendKeys("20.5937,78.9629");
+    }
+
+    @When("User enters invalid geofence details")
+    public void user_enters_invalid_geofence_details() {
+        WebElement geofenceName = driver.findElement(By.id("geofenceName"));
+        WebElement geofenceBoundary = driver.findElement(By.id("geofenceBoundary"));
+        geofenceName.sendKeys("");
+        geofenceBoundary.sendKeys("invalid-coordinates");
+    }
+
+    @And("User clicks on Create Geofence button")
+    public void user_clicks_on_create_geofence_button() {
+        WebElement createGeofenceButton = driver.findElement(By.id("createGeofenceButton"));
+        createGeofenceButton.click();
+    }
+
+    @Then("Geofence should be created successfully")
+    public void geofence_should_be_created_successfully() {
+        WebElement successMessage = driver.findElement(By.id("successMessage"));
+        Assert.assertTrue(successMessage.isDisplayed(), "Geofence creation failed!");
+        driver.quit();
+    }
+
+    @Then("User should see an error message")
+    public void user_should_see_an_error_message() {
+        WebElement errorMessage = driver.findElement(By.id("errorMessage"));
+        Assert.assertTrue(errorMessage.isDisplayed(), "Error message not displayed!");
+        driver.quit();
+    }
+
+    @Given("Geofence is active")
+    public void geofence_is_active() {
+        // Code to activate a geofence for the test
+    }
+
+    @When("Device exits the geofence boundary")
+    public void device_exits_the_geofence_boundary() {
+        // Code to simulate device exiting geofence boundary
+    }
+
+    @Then("User should receive an exit alert")
+    public void user_should_receive_an_exit_alert() {
+        WebElement exitAlert = driver.findElement(By.id("exitAlert"));
+        Assert.assertTrue(exitAlert.isDisplayed(), "Exit alert not received!");
+    }
+
+    @When("Device enters the geofence boundary")
+    public void device_enters_the_geofence_boundary() {
+        // Code to simulate device entering geofence boundary
+    }
+
+    @Then("User should receive an entry alert")
+    public void user_should_receive_an_entry_alert() {
+        WebElement entryAlert = driver.findElement(By.id("entryAlert"));
+        Assert.assertTrue(entryAlert.isDisplayed(), "Entry alert not received!");
+    }
+
+    @Given("Geofences are active")
+    public void geofences_are_active() {
+        // Code to ensure geofences are active for the test
+    }
+
+    @When("User views the geofences on the UI")
+    public void user_views_the_geofences_on_the_ui() {
+        // Code to navigate to geofence UI page
+    }
+
+    @Then("Active geofences should be displayed correctly")
+    public void active_geofences_should_be_displayed_correctly() {
+        WebElement geofenceList = driver.findElement(By.id("geofenceList"));
+        Assert.assertTrue(geofenceList.isDisplayed(), "Active geofences not displayed correctly!");
+        driver.quit();
+    }
+}
