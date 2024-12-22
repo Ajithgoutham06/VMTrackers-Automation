@@ -1,0 +1,20 @@
+Feature: Viewing Reports
+
+  Scenario: Successfully generate a report on device status
+    Given User is on Reports Page
+    When User selects "Device Status" report type
+    And User clicks on Generate Report button
+    Then Report on device status should be generated successfully
+
+  Scenario: Apply date range filter to reports
+    Given User is on Reports Page
+    When User selects "Device Status" report type
+    And User sets the date range from "2023-01-01" to "2023-12-31"
+    And User clicks on Generate Report button
+    Then Report should be filtered by the specified date range
+
+  Scenario: Ensure accurate data is displayed in reports
+    Given User is on Reports Page
+    When User selects "Device Performance" report type
+    And User clicks on Generate Report button
+    Then Report should display accurate and consistent data
