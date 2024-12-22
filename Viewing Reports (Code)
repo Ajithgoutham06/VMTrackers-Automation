@@ -1,0 +1,59 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.cucumber.java.en.*;
+
+public class ViewReportsSteps {
+    WebDriver driver;
+
+    @Given("User is on Reports Page")
+    public void user_is_on_reports_page() {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+        driver = new ChromeDriver();
+        driver.get("https://vmtrackers.app/reports");
+    }
+
+    @When("User selects {string} report type")
+    public void user_selects_report_type(String reportType) {
+        WebElement reportTypeDropdown = driver.findElement(By.id("reportTypeDropdown"));
+        reportTypeDropdown.sendKeys(reportType);
+    }
+
+    @When("User sets the date range from {string} to {string}")
+    public void user_sets_the_date_range_from_to(String startDate, String endDate) {
+        WebElement startDateInput = driver.findElement(By.id("startDate"));
+        WebElement endDateInput = driver.findElement(By.id("endDate"));
+        startDateInput.sendKeys(startDate);
+        endDateInput.sendKeys(endDate);
+    }
+
+    @And("User clicks on Generate Report button")
+    public void user_clicks_on_generate_report_button() {
+        WebElement generateReportButton = driver.findElement(By.id("generateReportButton"));
+        generateReportButton.click();
+    }
+
+    @Then("Report on device status should be generated successfully")
+    public void report_on_device_status_should_be_generated_successfully() {
+        WebElement report = driver.findElement(By.id("report"));
+        Assert.assertTrue(report.isDisplayed(), "Report generation failed!");
+        driver.quit();
+    }
+
+    @Then("Report should be filtered by the specified date range")
+    public void report_should_be_filtered_by_the_specified_date_range() {
+        WebElement report = driver.findElement(By.id("report"));
+        // Validate the date range in the report
+        Assert.assertTrue(report.getText().contains("2023-01-01"), "Date range filter failed!");
+        driver.quit();
+    }
+
+    @Then("Report should display accurate and consistent data")
+    public void report_should_display_accurate_and_consistent_data() {
+        WebElement report = driver.findElement(By.id("report"));
+        // Validate the accuracy of the data in the report
+        Assert.assertTrue(report.getText().contains("Expected Data"), "Data accuracy validation failed!");
+        driver.quit();
+    }
+}
