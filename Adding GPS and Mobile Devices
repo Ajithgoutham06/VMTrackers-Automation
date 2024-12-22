@@ -1,0 +1,25 @@
+Feature: Adding GPS and Mobile Devices
+
+  Scenario: Successfully add a GPS device with valid details
+    Given User is on Add Device Page
+    When User enters valid GPS device details
+    And User clicks on Add Device button
+    Then Device should be added successfully
+
+  Scenario: Successfully add a mobile device with valid details
+    Given User is on Add Device Page
+    When User enters valid mobile device details
+    And User clicks on Add Device button
+    Then Device should be added successfully
+
+  Scenario: Attempt to add a device with invalid details
+    Given User is on Add Device Page
+    When User enters invalid device details
+    And User clicks on Add Device button
+    Then User should see an error message
+
+  Scenario: Attempt to add a duplicate device
+    Given User is on Add Device Page
+    When User enters details for an existing device
+    And User clicks on Add Device button
+    Then User should see an error message
