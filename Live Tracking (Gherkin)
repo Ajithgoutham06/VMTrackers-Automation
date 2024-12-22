@@ -1,0 +1,21 @@
+Feature: Live Tracking
+
+  Scenario: Verify real-time tracking updates for a vehicle
+    Given User is on Live Tracking Page
+    When Vehicle location updates in real-time
+    Then The UI should update to show the new location of the vehicle
+
+  Scenario: Verify real-time tracking updates for a mobile device
+    Given User is on Live Tracking Page
+    When Mobile device location updates in real-time
+    Then The UI should update to show the new location of the mobile device
+
+  Scenario: Validate UI responsiveness to changes in device location
+    Given Device is being tracked in real-time
+    When Device location changes
+    Then The UI should remain responsive and update correctly
+
+  Scenario: Verify integration with map services for location tracking
+    Given User is on Live Tracking Page
+    When Device moves
+    Then The map service should update to show the new location
